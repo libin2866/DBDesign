@@ -10,6 +10,7 @@
 #define new DEBUG_NEW
 #endif
 
+ bool InitSystem(void);//进行初始化，包括建立磁盘存储文件等操作
 
 // CDBDesginApp
 
@@ -92,3 +93,49 @@ BOOL CDBDesginApp::InitInstance()
 	return FALSE;
 }
 
+
+
+bool InitSystem(void)
+{
+	FILE* fp;
+	int id = 0;
+	int userNum = 0;
+	fp = fopen("StorageFile","rb");//StorageFile为存储所有数据的文件
+	if(fp == NULL)
+		fp = fopen("StorageFile","w");
+	fclose(fp);
+	
+	fp = fopen("Syslog","rb");//Syslog记录系统日志
+	if(fp == NULL)
+		fp = fopen("Syslog","w");
+	fclose(fp);
+
+	fp = fopen("userlist","rb");
+	/*if(fp == NULL)
+	{
+		char str[100]; 
+		strcpy(str,"userlist(id int pkey,name char(9),authority int,password char(9))");
+		int	strNum = getString(ch,0,str);
+		if(CreateTable(strNum) == true)
+		{
+			printf("初始化用户列表成功!\n");
+		}
+		else
+		{
+			printf("初始化用户列表有误!\n");
+			return false;
+		}
+	
+		strcpy(str,"userlist values(1,lutao,1,123)");
+		strNum = getString(ch,0,str);
+		if(InsertTable(strNum) == true)
+			printf("插入管理员成功!\n");
+		else
+		{
+			printf("插入管理员失败!\n");
+			return false;
+		}
+	}*/
+
+	return true;
+}
