@@ -64,6 +64,9 @@ BEGIN_MESSAGE_MAP(CDBDesginDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_RESET, &CDBDesginDlg::OnBnClickedReset)
+	//ON_BN_CLICKED(IDOK, &CDBDesginDlg::OnBnClickedOk)
+	ON_BN_CLICKED(IDC_ABOUT, &CDBDesginDlg::OnBnClickedAbout)
+	ON_BN_CLICKED(IDC_OPBtn, &CDBDesginDlg::OnBnClickedOpbtn)
 END_MESSAGE_MAP()
 
 
@@ -78,6 +81,7 @@ BOOL CDBDesginDlg::OnInitDialog()
 	// IDM_ABOUTBOX 必须在系统命令范围内。
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
+	 //CString m_strCaption = " 数据库管理系统"; 
 
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
 	if (pSysMenu != NULL)
@@ -102,6 +106,38 @@ BOOL CDBDesginDlg::OnInitDialog()
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
+
+//
+//BOOL CDBDesginDlg::PreTranslateMessage(MSG* pMsg) 
+//{
+//    // TODO: Add your specialized code here and/or call the base class
+//       // TODO: Add your specialized code here and/or call the base class
+//    if   (pMsg->message   ==   WM_KEYDOWN)   
+//    {   
+//        if   (pMsg->wParam==VK_RETURN)   
+//            return TRUE;//截获消息 
+//    }   
+//    return CDialog::PreTranslateMessage(pMsg);
+//}
+
+//BOOL  CDBDesginDlg::PreTranslateMessage(MSG*   pMsg)   
+//{ 
+//	if(   pMsg-> message   ==   WM_KEYDOWN   ) 
+//	{       
+//		if(pMsg-> hwnd   ==   GetDlgItem(IDC_SQLStatement)-> m_hWnd) 
+//		{ 
+//			switch(   pMsg-> wParam   ) 
+//			{ 
+//			case   VK_RETURN: 
+//			//Onbutton1(); 
+//			} 
+//
+//		} 
+//		return   CDialog::PreTranslateMessage(pMsg); 
+//
+//	}
+//}
+
 
 void CDBDesginDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
@@ -156,5 +192,28 @@ HCURSOR CDBDesginDlg::OnQueryDragIcon()
 
 void CDBDesginDlg::OnBnClickedReset()
 {
-	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼þÍ¨Öª´¦Àí³ÌÐò´úÂë
+	
+}
+
+
+void CDBDesginDlg::OnBnClickedAbout()
+{
+	CAboutDlg aboutdlg;
+	aboutdlg.DoModal();
+
+}
+
+
+void CDBDesginDlg::OnBnClickedOpbtn()
+{
+	char sql[200];
+	int type;
+	GetDlgItemText(IDC_SQLStatement,sql,sizeof(sql));
+	type= AnalyseSql(sql);
+
+	if(type==CREATE_TABLE)//Create Table
+	{
+		
+	}
+
 }

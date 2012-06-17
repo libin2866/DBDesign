@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "Global.h"
 
 // CDBDesginDlg ¶Ô»°¿ò
 class CDBDesginDlg : public CDialogEx
@@ -31,4 +31,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedReset();
+	afx_msg void OnBnClickedOk();
+	afx_msg void OnBnClickedAbout();
+	afx_msg void OnBnClickedOpbtn();
 };

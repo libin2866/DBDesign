@@ -56,4 +56,58 @@
 #endif
 
 
+#define SUCCESS true
+#define SQLTYPE int
+
+
+////////////以下是对于SQL类型的定义///////////////////////
+#define CREATE_TABLE 1
+#define EDIT_TABLE 2
+#define RENAME_TABLE 3
+#define DROP_TABLE 4
+
+
+
+
+
+
+//////////////词法分析////////////////
+
+//保留字个数
+#define reservednum 21   
+
+#define getchdo if(-1==getch()) return -1
+#define getsymdo if(-1==getsym()) return -1
+
+enum symbol{
+	createsym,editsym,renamesym,tablesym,dropsym,insertsym,deletesym,
+	updatesym,selectsym,setsym,intosym,fromsym,insym,keysym,notkeysym,validsym,usesym,dbsym,
+	numsym,	wheresym,thensym,nul,notnul,
+	identifier,number,plus,minus,
+	times,slash,eql,lss,leql,gtr,geql,lparen,
+	rparen,comma,semicolon,period,
+};
+
+struct AnalysisWord{
+	char word[15];//Store the word
+	enum symbol type;//Store the type
+	int  num;//Store the number of a num,if not a num,sets 0.
+};
+
+extern enum symbol sinsym[256];//ssym,单字符的符号值
+extern enum symbol wordsym[reservednum];//wsym,保留字对应的符号值
+ extern AnalysisWord AWord[255];//分析出来的内容
+#include <iostream>
+#include <tchar.h>
+#pragma once 
+// TODO: 在此处引用程序要求的附加头文件
+#include<String.h>
+//#define norw 25//关键字个数
+#define charlength 10//符号最大长度
+#define nmax 14//number的最大位数
+#define symnum 32
+#define levmax 3 //最大允许过程嵌套声明层数[0,levmax]
+#define addmax 2047
+//#define FAILED false;
+
 
