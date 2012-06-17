@@ -13,7 +13,7 @@ static int cnum=-1;//计数用
 char sh[charlength];//存储当前的字符串
 enum symbol sym;//当前的符号
 int num;//当前数字
-
+int iter;//收集字母
 char word[reservednum][charlength];//保留字
 AnalysisWord AWord[255];//分析出来的内容
 
@@ -26,14 +26,34 @@ SQLTYPE AnalyseSql(char csql[]){
 	strcpy(sql,csql);
 	length=strlen(csql);
 	init();
-
 	cc=ll=0;
+	cnum=-1;
+	iter=0;
 	ch=' ';
 	int count=100;
-	 while(count&&!getsym()) count--;	
+	int mark=0;
+	while(count&&!mark) {
+		count--;
+		mark=getsym();
+	}
+	if(mark==2){
+		return 0;
+	}
 
 	 if(AWord[0].type==createsym&&AWord[1].type==tablesym)
 		 return CREATE_TABLE;
+	 if(AWord[0].type==editsym&&AWord[1].type==tablesym)
+		 return EDIT_TABLE;
+	 if(AWord[0].type==renamesym&&AWord[1].type==tablesym)
+		 return RENAME_TABLE;
+	 if(AWord[0].type==dropsym&&AWord[1].type==tablesym)
+		 return DROP_TABLE;
+	 if(AWord[0].type==insertsym&&AWord[1].type==intosym)
+		 return INSERT_INTO;
+	 if(AWord[0].type==deletesym&&AWord[1].type==fromsym)
+		 return DELETE_FROM;
+	 if(AWord[0].type==updatesym)
+		 return UPDATE;
 
 	return 0;
 }
@@ -44,6 +64,8 @@ void init(void){
 	/*******************设置单字符号**************************/
 	for(i=0;i<256;i++){
 		sinsym[i]=nul;
+		strcpy(AWord[i].word,"");
+		AWord[i].type=empty;
 	}
 	sinsym['+']=plus;
 	sinsym['-']=minus;
@@ -55,7 +77,7 @@ void init(void){
 	sinsym[',']=comma;
 	sinsym['.']=period;
 	sinsym[';']=semicolon;
-
+	sinsym['\'']=quote;//单引号
 
 /*****************设置保留字名字，按照字母顺序，便于折半查找*************/
 	strcpy(&(word[0][0]),"CREATE");
@@ -67,19 +89,23 @@ void init(void){
 	strcpy(&(word[6][0]),"IN");
 	strcpy(&(word[7][0]),"INSERT");
 	strcpy(&(word[8][0]),"INTO");
-	strcpy(&(word[9][0]),"KEY");
-	strcpy(&(word[10][0]),"NOT_KEY");
-	strcpy(&(word[11][0]),"NOT_NULL");
-	strcpy(&(word[12][0]),"NULL");
-	strcpy(&(word[13][0]),"RENAME");
-	strcpy(&(word[14][0]),"SELECT");
-	strcpy(&(word[15][0]),"SET");
-	strcpy(&(word[16][0]),"TABLE");	
-	strcpy(&(word[17][0]),"UPDATE");
-	strcpy(&(word[18][0]),"USE");
-	strcpy(&(word[19][0]),"VALID");
-	strcpy(&(word[20][0]),"WHERE");
-
+	strcpy(&(word[9][0]),"INVALID");
+	strcpy(&(word[10][0]),"KEY");
+	strcpy(&(word[11][0]),"NOT_KEY");
+	strcpy(&(word[12][0]),"NOT_NULL");
+	strcpy(&(word[13][0]),"NULL");
+	strcpy(&(word[14][0]),"RENAME");
+	strcpy(&(word[15][0]),"SELECT");
+	strcpy(&(word[16][0]),"SET");
+	strcpy(&(word[17][0]),"TABLE");	
+	strcpy(&(word[18][0]),"UPDATE");
+	strcpy(&(word[19][0]),"USE");
+	strcpy(&(word[20][0]),"VALID");
+	strcpy(&(word[21][0]),"VALUES");
+	strcpy(&(word[22][0]),"WHERE");
+	strcpy(&(word[23][0]),"datetime");
+	strcpy(&(word[24][0]),"int");
+	strcpy(&(word[25][0]),"varchar");
 	/*****************************设置保留字符号*************************************/
 	wordsym[0]=createsym;
 	wordsym[1]=dbsym;
@@ -90,18 +116,24 @@ void init(void){
 	wordsym[6]=insym;
 	wordsym[7]=insertsym;
 	wordsym[8]=intosym;
-	wordsym[9]=keysym;
-	wordsym[10]=notkeysym;
-	wordsym[11]=notnul;
-	wordsym[12]=nul;
-	wordsym[13]=renamesym;
-	wordsym[14]=selectsym;
-	wordsym[15]=setsym;
-	wordsym[16]=tablesym;
-	wordsym[17]=updatesym;
-	wordsym[18]=usesym;
-	wordsym[19]=validsym;
-	wordsym[20]=wheresym;
+	wordsym[9]=invalidsym;
+	wordsym[10]=keysym;
+	wordsym[11]=notkeysym;
+	wordsym[12]=notnul;
+	wordsym[13]=nul;
+	wordsym[14]=renamesym;
+	wordsym[15]=selectsym;
+	wordsym[16]=setsym;
+	wordsym[17]=tablesym;
+	wordsym[18]=updatesym;
+	wordsym[19]=usesym;
+	wordsym[20]=validsym;
+	wordsym[21]=valuessym;
+	wordsym[22]=wheresym;
+	wordsym[23]=datetimesym;
+	wordsym[24]=intsym;
+	wordsym[25]=varcharsym;
+
 
 
 }
@@ -116,20 +148,22 @@ int getch(void){//漏掉空格，读取一个字符;每次读一行，存入line缓冲区，line被getsy
 		}
 		ll=0;
 		cc=0;
-		int iter=0;//收集字母
+
 		ch=sql[iter];
-		while(ch!=10)//空格
+		while(ch!=10)//回车
 		{
-			if((ch=sql[iter++])==EOF)
+			if((ch=sql[iter++])==0)
 			//if(EOF==fscanf(charInString,"%c",&ch))
 			{
-				line[11]=0;
+				line[ll]=0;
 				break;
 			}
 			line[ll]=ch;
 			ll++;
 		}
-		
+		if(line[ll]!=0){
+			line[ll]=0;
+		}
 	
 	}
 		ch=line[cc];
@@ -141,7 +175,7 @@ int getsym(void){//词法分析，获取一个符号
 		int i,j,k,m=0;
 		int frac=0;
 		//char str[10];
-		while(ch==' '||ch==10||ch==9)//忽略空格，换行和TAB
+		while(ch==' '||ch==9||ch==10)//忽略空格，换行和TAB
 		{
 			
 			getchdo;
@@ -242,26 +276,25 @@ int getsym(void){//词法分析，获取一个符号
 				}
 			else
 			{
-				//if(ch==':')//检测赋值符号
-				//{
-				//	getchdo;
-				//	if(ch=='=')
-				//	{
-				//	sym=eql;
-				//	cnum++;
-				//	
-				//	strcpy(AWord[cnum].word,":=");
-				//	AWord[cnum].type=eql;//equal		
-				//	//AWord[cnum].line=wordLine;//将识别出来的字符存储起来
-				//	getchdo;
-				//	}
-				//	else{
-				//		sym=nul;
-				//		cnum++;
-				//	
-				//	}
-				//}
-				//else
+				if(ch=='\'')//检测单引号
+				{
+					getchdo;
+					memset(sh,'\0',charlength);//先清空sh中原来的内容，防止出错****************************
+					int countx=charlength+1;
+					while(ch!='\''&&countx)//结尾
+					{
+						strcat(sh,&ch);//存入
+						getchdo;
+						countx--;
+					}
+					getchdo;
+					if(countx<=0) return 2;//出现错误少了第二个'号
+					cnum++;//sym=eql;
+					strcpy(AWord[cnum].word,sh);	
+					AWord[cnum].type=quote;
+			
+				}
+				else
 				{
 					if(ch=='<')//检测小于或小于等于符号
 					{
@@ -380,7 +413,8 @@ int getsym(void){//词法分析，获取一个符号
 									
 									break;
 							}
-								if(!m) {cnum++; return 2;}//错误字符
+								if(!m) {//cnum++; //return 2;
+								}//其他字符
 							getchdo;
 								/*if(sym!=period)
 									getchdo;*/

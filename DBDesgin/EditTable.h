@@ -4,4 +4,4 @@
 #include "afxwin.h"
 #include <string.h>
 
-CString CreateTable(void);
+CString EditTable(void);

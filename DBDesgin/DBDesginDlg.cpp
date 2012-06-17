@@ -6,11 +6,19 @@
 #include "DBDesgin.h"
 #include "DBDesginDlg.h"
 #include "afxdialogex.h"
+#include"CreateTable.h"
+#include"EditTable.h"
+#include"RenameTable.h"
+#include"Drop_Table.h"
+#include"Insert_Into.h"
+#include"DeleteFrom.h"
+#include"Update.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
+CBrush m_brush;//改变颜色
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
@@ -67,6 +75,7 @@ BEGIN_MESSAGE_MAP(CDBDesginDlg, CDialogEx)
 	//ON_BN_CLICKED(IDOK, &CDBDesginDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_ABOUT, &CDBDesginDlg::OnBnClickedAbout)
 	ON_BN_CLICKED(IDC_OPBtn, &CDBDesginDlg::OnBnClickedOpbtn)
+	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 
@@ -82,7 +91,8 @@ BOOL CDBDesginDlg::OnInitDialog()
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 	 //CString m_strCaption = " 数据库管理系统"; 
-
+	m_brush.CreateSolidBrush(RGB(255,0,0));
+	GetDlgItem(IDC_RESULT)-> SetWindowText("欢迎来到数据库管理系统!");
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
 	if (pSysMenu != NULL)
 	{
@@ -192,7 +202,9 @@ HCURSOR CDBDesginDlg::OnQueryDragIcon()
 
 void CDBDesginDlg::OnBnClickedReset()
 {
-	
+	if(1==MessageBox("确认清空？","注意",MB_OKCANCEL|MB_ICONWARNING )){
+	GetDlgItem(IDC_SQLStatement)-> SetWindowText("");
+	}
 }
 
 
@@ -208,12 +220,39 @@ void CDBDesginDlg::OnBnClickedOpbtn()
 {
 	char sql[200];
 	int type;
+	CString result;
 	GetDlgItemText(IDC_SQLStatement,sql,sizeof(sql));
 	type= AnalyseSql(sql);
 
 	if(type==CREATE_TABLE)//Create Table
 	{
-		
+		result=CreateTable();
 	}
+	if(type==EDIT_TABLE)//Edit Table
+	{
+		result=EditTable();
+	}
+	if(type==RENAME_TABLE) result=RenameTable();
+	if(type==DROP_TABLE) result=DropTable();
+	if(type==INSERT_INTO) result=InsertInto();
+	if(type==DELETE_FROM) result=DeleteFrom();
+	if(type==UPDATE) result=Update();
 
+
+	if(type==0) result="您输入的语句有误！";
+	GetDlgItem(IDC_RESULT)-> SetWindowText(result);
+}
+
+
+
+HBRUSH CDBDesginDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
+
+	   if (pWnd->GetDlgCtrlID() == IDC_RESULT)
+     {
+         pDC->SetTextColor(RGB(255, 0, 0));
+     }
+
+	return hbr;
 }

@@ -66,26 +66,27 @@
 #define RENAME_TABLE 3
 #define DROP_TABLE 4
 
-
-
-
-
+#define INSERT_INTO 5
+#define DELETE_FROM 6
+#define UPDATE 7
+#define SELECT 8
 
 //////////////词法分析////////////////
 
 //保留字个数
-#define reservednum 21   
+#define reservednum 26  
 
 #define getchdo if(-1==getch()) return -1
 #define getsymdo if(-1==getsym()) return -1
 
 enum symbol{
-	createsym,editsym,renamesym,tablesym,dropsym,insertsym,deletesym,
+	empty,nul,createsym,editsym,renamesym,tablesym,dropsym,insertsym,deletesym,
 	updatesym,selectsym,setsym,intosym,fromsym,insym,keysym,notkeysym,validsym,usesym,dbsym,
-	numsym,	wheresym,thensym,nul,notnul,
+	numsym,	wheresym,notnul,valuessym,
 	identifier,number,plus,minus,
 	times,slash,eql,lss,leql,gtr,geql,lparen,
-	rparen,comma,semicolon,period,
+	rparen,comma,semicolon,period,quote,
+	varcharsym,datetimesym,intsym,invalidsym,
 };
 
 struct AnalysisWord{
@@ -103,7 +104,7 @@ extern enum symbol wordsym[reservednum];//wsym,保留字对应的符号值
 // TODO: 在此处引用程序要求的附加头文件
 #include<String.h>
 //#define norw 25//关键字个数
-#define charlength 10//符号最大长度
+#define charlength 15//符号最大长度
 #define nmax 14//number的最大位数
 #define symnum 32
 #define levmax 3 //最大允许过程嵌套声明层数[0,levmax]

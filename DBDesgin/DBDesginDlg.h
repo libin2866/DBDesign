@@ -34,4 +34,5 @@ public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedAbout();
 	afx_msg void OnBnClickedOpbtn();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

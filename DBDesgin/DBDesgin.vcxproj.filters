@@ -45,6 +45,27 @@
     <ClInclude Include="CreateTable.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="EditTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RenameTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Drop_Table.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Insert_Into.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteFrom.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Update.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SELECT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DBDesgin.cpp">
@@ -60,6 +81,27 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CreateTable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EditTable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RenameTable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Drop_Table.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Insert_Into.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteFrom.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Update.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SELECT.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
