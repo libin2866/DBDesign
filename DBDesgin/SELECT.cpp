@@ -56,56 +56,59 @@ CString Select(void){
 		return result;
 		}
 	}else{
-		i++;
-		if(AWord[i].type==identifier){//可能为表名 table.id=table2.id 也可能为列名
-			//////////////////////////////////??
+		do{
 			i++;
-			if(AWord[i].type==period){//进行连接查询
+			if(AWord[i].type==identifier){//可能为表名 table.id=table2.id 也可能为列名
+				//////////////////////////////////??
 				i++;
-				if(AWord[i].type!=identifier){
-					result="SQL语句错误！.后缺少对应的列名?";
-					return result;
-				}
-				//////////////////table1.id1分析出来了 这里可以有操作
-				i++;
-				if(AWord[i].type!=eql){
-					result="SQL语句错误！连接查询缺少'='号?";
-					return result;
-				}
-				//////////////////table1.id1=分析出来了 这里可以有操作
-				i++;
-				if(AWord[i].type!=identifier){
-					result="SQL语句错误！连接查询'='后缺少表名?";
-					return result;
-				}
-				//////////////////table1.id1=table2分析出来了 这里可以有操作
-				i++;
-				if(AWord[i].type!=period){
-					result="SQL语句错误！连接查询缺少'.'?";
-					return result;
-				}
-				//////////////////table1.id1=table2.分析出来了 这里可以有操作
-				i++;
-				if(AWord[i].type!=identifier){
-					result="SQL语句错误！连接查询'.'后缺少列名?";
-					return result;
-				}//////////////////table1.id1=table2.id2分析出来了 这里可以有操作
-				i++;
-			}//period
-			if(AWord[i].type==geql||AWord[i].type==eql||AWord[i].type==leql||AWord[i].type==lss||AWord[i].type==gtr){//逻辑运算
-				///////////////////////
-				i++;
-				///////////////////
+				if(AWord[i].type==period){//进行连接查询
+					i++;
+					if(AWord[i].type!=identifier){
+						result="SQL语句错误！.后缺少对应的列名?";
+						return result;
+					}
+					//////////////////table1.id1分析出来了 这里可以有操作
+					i++;
+					if(AWord[i].type!=eql){
+						result="SQL语句错误！连接查询缺少'='号?";
+						return result;
+					}
+					//////////////////table1.id1=分析出来了 这里可以有操作
+					i++;
+					if(AWord[i].type!=identifier){
+						result="SQL语句错误！连接查询'='后缺少表名?";
+						return result;
+					}
+					//////////////////table1.id1=table2分析出来了 这里可以有操作
+					i++;
+					if(AWord[i].type!=period){
+						result="SQL语句错误！连接查询缺少'.'?";
+						return result;
+					}
+					//////////////////table1.id1=table2.分析出来了 这里可以有操作
+					i++;
+					if(AWord[i].type!=identifier){
+						result="SQL语句错误！连接查询'.'后缺少列名?";
+						return result;
+					}//////////////////table1.id1=table2.id2分析出来了 这里可以有操作
+					i++;
+				}//period
+				if(AWord[i].type==geql||AWord[i].type==eql||AWord[i].type==leql||AWord[i].type==lss||AWord[i].type==gtr){//逻辑运算
+					///////////////////////
+					i++;
+					///////////////////
 
+				}
+
+
+
+			}//identifier1
+			else{
+				result="SQL语句错误！WHERE后缺少表名或列名?";
+						return result;
 			}
 
-
-
-		}//identifier1
-		else{
-			result="SQL语句错误！WHERE后缺少表名或列名?";
-					return result;
-		}
+		}while(AWord[i].type==andsym);
 
 	}//wheresym
 

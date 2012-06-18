@@ -67,14 +67,14 @@
 #define DROP_TABLE 4
 
 #define INSERT_INTO 5
-#define DELETE_FROM 6
+#define DELETE_FROM		6
 #define UPDATE 7
 #define SELECT 8
 
 //////////////词法分析////////////////
 
 //保留字个数
-#define reservednum 26  
+#define reservednum 27  
 
 #define getchdo if(-1==getch()) return -1
 #define getsymdo if(-1==getsym()) return -1
@@ -83,7 +83,7 @@ enum symbol{
 	empty,nul,createsym,editsym,renamesym,tablesym,dropsym,insertsym,deletesym,
 	updatesym,selectsym,setsym,intosym,fromsym,insym,keysym,notkeysym,validsym,usesym,dbsym,
 	numsym,	wheresym,notnul,valuessym,
-	identifier,number,plus,minus,
+	identifier,number,plus,minus,andsym,
 	times,slash,eql,lss,leql,gtr,geql,lparen,
 	rparen,comma,semicolon,period,quote,
 	varcharsym,datetimesym,intsym,invalidsym,

@@ -1,3 +1,5 @@
 #×¢ÊÍ
 Debug/
 DBDesign/Debug/
+*.sdf
+ipch/

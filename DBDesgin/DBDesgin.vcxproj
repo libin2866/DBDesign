@@ -105,6 +105,7 @@
     <ClInclude Include="DeleteFrom.h" />
     <ClInclude Include="Drop_Table.h" />
     <ClInclude Include="EditTable.h" />
+    <ClInclude Include="FileOperation.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Insert_Into.h" />
     <ClInclude Include="RenameTable.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="DeleteFrom.cpp" />
     <ClCompile Include="Drop_Table.cpp" />
     <ClCompile Include="EditTable.cpp" />
+    <ClCompile Include="FileOperation.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Insert_Into.cpp" />
     <ClCompile Include="RenameTable.cpp" />
