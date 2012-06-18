@@ -136,9 +136,6 @@
   <ItemGroup>
     <ResourceCompile Include="DBDesgin.rc" />
   </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="..\WIN7Style.manifest" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

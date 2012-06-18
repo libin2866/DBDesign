@@ -116,7 +116,4 @@
       <Filter>资源文件</Filter>
     </ResourceCompile>
   </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="..\WIN7Style.manifest" />
-  </ItemGroup>
 </Project>
