@@ -58,7 +58,7 @@ bool BuildModel(char *dbName,char *tableName,TableMode tableMode){
 };
 
 
-bool EditModel(char *dbName,char* tableName, TableMode tableMode){//修改表
+bool EditModel(char *dbName,char* tableName, char* oldcolumn,TableMode tableMode){//修改表
 	return true;
 };
 

@@ -36,17 +36,17 @@ CString UseDB(void){
 	tables[0].push_back("MySubTable2");
 	tables[1].push_back("MySubTable3");
 	tables[1].push_back("MySubTable4");
-/*
+
 	vector<char*> returntables=ShowTables(dbName);  
 	for(int i=0;i<returntables.size();i++)
 	{tables[i].push_back(returntables[i]);//先把表放入
 	   vector<char*> returncolumns=ShowColumns(dbName,returntables[i]);
-	  for(int j;j<returncolumns.size();j++){
+	  for(int j=0;j<returncolumns.size();j++){
 		  tables[i].push_back(returncolumns[i]);
 	  }//j
 	}//i
 
-	*/
+/*	*/
 	//vector< vector<char*> > Array( 20, vector<char*>(0) );
 
 	//Array[0].push_back("MySubTable0");

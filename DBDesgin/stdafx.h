@@ -71,6 +71,7 @@
 #define UPDATE 7
 #define SELECT 8
 #define USE_DB 9
+#define DESC_TABLE 10
 //////////////词法分析////////////////
 
 //保留字个数
@@ -84,7 +85,7 @@ enum symbol{
 	empty,nul,createsym,editsym,renamesym,tablesym,dropsym,insertsym,deletesym,
 	updatesym,selectsym,setsym,intosym,fromsym,insym,keysym,notkeysym,validsym,usesym,dbsym,
 	numsym,	wheresym,notnul,valuessym,
-	identifier,number,plus,minus,andsym,
+	identifier,number,plus,minus,andsym,descsym,
 	times,slash,eql,lss,leql,gtr,geql,lparen,
 	rparen,comma,semicolon,period,quote,
 	varcharsym,datetimesym,intsym,invalidsym,

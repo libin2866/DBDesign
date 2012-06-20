@@ -15,7 +15,7 @@
 #include"Update.h"
 #include"CreateDB.h"
 #include"UseDB.h"
-
+#include"DescTable.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -242,8 +242,9 @@ void CDBDesginDlg::OnBnClickedOpbtn()
 	if(type==UPDATE) result=Update();
 	if(type==USE_DB) result=UseDB();
 	if(type==CREATE_DB) result=CreateDB();
-
+	if(type==DESC_TABLE) result=DescTable();
 	if(type==-1) result="您输入的语句有误！";
+
 	GetDlgItem(IDC_RESULT)-> SetWindowText(result);
 }
 

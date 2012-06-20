@@ -1,6 +1,8 @@
 #include"stdafx.h"
 #include"Insert_Into.h"
+#include"FileOperation.h"
 /*Sample SQL:
+
 INSERT INTO mytable VALUES('test','9','2012-6-17')IN mydb;
 
 
@@ -65,6 +67,10 @@ CString InsertInto(void){
 
 
 	///////////////文件操作/////////////////////
+
+
+
+	//InsertData(dbName,tableName);
 
 	result="操作成功！";
 	return result;

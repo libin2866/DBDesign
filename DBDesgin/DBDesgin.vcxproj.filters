@@ -81,6 +81,12 @@
     <ClInclude Include="CreateDB.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DescTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TableModeDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DBDesgin.cpp">
@@ -132,6 +138,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CreateDB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DescTable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TableModeDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -58,6 +58,8 @@ SQLTYPE AnalyseSql(char csql[]){
 		 return CREATE_DB;
 	 if(AWord[0].type==usesym)
 		 return USE_DB;
+	  if(AWord[0].type==descsym)
+		 return DESC_TABLE;
 	return -1;
 }
 
@@ -88,6 +90,7 @@ void init(void){
 	strcpy(&(word[a++][0]),"CREATE");
 	strcpy(&(word[a++][0]),"DATABASE");
 	strcpy(&(word[a++][0]),"DELETE");
+	strcpy(&(word[a++][0]),"DESC");
 	strcpy(&(word[a++][0]),"DROP");
 	strcpy(&(word[a++][0]),"EDIT");
 	strcpy(&(word[a++][0]),"FROM");
@@ -117,6 +120,7 @@ void init(void){
 	wordsym[a++]=createsym;
 	wordsym[a++]=dbsym;
 	wordsym[a++]=deletesym;
+	wordsym[a++]=descsym;
 	wordsym[a++]=dropsym;
 	wordsym[a++]=editsym;
 	wordsym[a++]=fromsym;

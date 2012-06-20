@@ -71,7 +71,7 @@ CString CreateTable(void){
 	if(AWord[i].type==insym){//in XXX  xxx为目标数据库
 		i++;
 		if(AWord[i].type==identifier){
-			strcpy(dbName,AWord[i+1].word);//这个是数据库名，可以利用该名字选择要操作的数据库，先判断该数据库存不存在//////////////文件操作
+			strcpy(dbName,AWord[i].word);//这个是数据库名，可以利用该名字选择要操作的数据库，先判断该数据库存不存在//////////////文件操作
 		}
 		else{
 		result="缺少您要操作的数据库!";

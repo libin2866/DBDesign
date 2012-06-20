@@ -64,7 +64,7 @@ CString EditTable(void){
 	if(AWord[i].type==insym){//in XXX  xxx为目标数据库
 		i++;
 		if(AWord[i].type==identifier){
-			strcpy(dbName,AWord[i+1].word);//这个是数据库名，可以利用该名字选择要操作的数据库，先判断该数据库存不存在//////////////文件操作
+			strcpy(dbName,AWord[i].word);//这个是数据库名，可以利用该名字选择要操作的数据库，先判断该数据库存不存在//////////////文件操作
 		}
 		else{
 		result="缺少您要操作的数据库!";
@@ -92,14 +92,18 @@ CString EditTable(void){
 	//先判断是否存在
 	strcpy(tableName,AWord[2].word);//操作表名//////////////这里需要文件处理，把表名存入文件。
    
-	i=5;//第四个是旧列名,第五个为新列名，第六个为数据类型
+	i=4;//第四个是旧列名,第五个为新列名，第六个为数据类型
 	TableMode newcolumn;//新建一个字段
-
+	char oldcolumn[15];//旧字段
 	keymark=false;//判断是否设置key 或者not key 若没有 则执行默认的操作not key
 	nullmark=false;//判断是否设置null 或者not null 若没有 则执行默认的操作null
 	validmark=false;//判断是否设置valid 若没有 则执行默认的操作valid
 
 	//i++;//选下一个关键字
+	if(AWord[i].type==identifier){//旧列名，查找用
+		strcpy(oldcolumn,AWord[i].word);
+		i++;
+	}
 
 	if(AWord[i].type==identifier){//列名
 		strcpy(newcolumn.sFiledName,AWord[i].word);
@@ -152,8 +156,10 @@ CString EditTable(void){
 		newcolumn.bValidFlag=1;//默认是有效
 	}
 
-		EditModel(dbName,tableName,newcolumn);//写入文件
-
+	if(!EditModel(dbName,tableName,oldcolumn,newcolumn)){//写入文件
+		result="修改失败！旧字段不存在？";
+		return result;
+		}
 	
 	result="操作成功！";
 
