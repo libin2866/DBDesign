@@ -10,9 +10,9 @@ bool BuildTable(char* dbName,char* tableName ,int columns );//建立表（写入表名到
 
 bool BuildModel(char*,char*,TableMode);//写入表字段
 
-bool EditModel(char *dbName,char* tableName, TableMode tableMode);//修改表
+bool EditModel(char *dbName,char* tableName, TableMode tableMode);//修改表(先判断字段是否存在，不存在直接返回false)
 
-bool RenameTableFile(char* dbName,char* prename,char* latname);//重命名
+bool RenameTableFile(char* dbName,char* prename,char* latname);//重命名(先判断表是否存在，不存在直接返回false)
 
 bool DeleteTable(char* dbName,char *tableName);//删除表
 
@@ -20,7 +20,10 @@ vector<char*> ShowTables(char* dbName);//返回数据库的所有表
 
 vector<char*> ShowColumns(char* dbName,char* tableName);//返回一个数据库中一张表的所有属性 \
 
-bool IsTableExists(char*dbName,char* tableName);//判断一个数据库中某张表是否存在(修改表时用）
 
-bool IsColumnExists(char* dbName,char *tableName,char *column);//判断一个数据库中指定表的字段是否存在（修改字段时用）
+
+
+//bool IsTableExists(char*dbName,char* tableName);//判断一个数据库中某张表是否存在(修改表时用）
+
+//bool IsColumnExists(char* dbName,char *tableName,char *column);//判断一个数据库中指定表的字段是否存在（修改字段时用）
 
