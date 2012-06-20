@@ -1,12 +1,18 @@
 #include"stdafx.h"
 #include"SELECT.h"
-/*
+/* Sample SQL
+
 SELECT * 
 FROM mytable,yourtble WHERE Condition??
 
 SELECT username FROM mytable;
+
 SELECT username,age FROM mytable;
+
+SELECT username FROM mytable WHERE age>'10';
+
 SELECT username FROM mytable,yourtable WHERE mytable.id=yourtable.id AND age='10';
+
 
 
 */

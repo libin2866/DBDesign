@@ -69,6 +69,18 @@
     <ClInclude Include="FileOperation.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="TableDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UseDB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateDB.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DBDesgin.cpp">
@@ -108,6 +120,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="FileOperation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TableDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UseDB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateDB.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

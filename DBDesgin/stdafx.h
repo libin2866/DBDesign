@@ -61,21 +61,22 @@
 
 
 ////////////以下是对于SQL类型的定义///////////////////////
+#define CREATE_DB 0
 #define CREATE_TABLE 1
 #define EDIT_TABLE 2
 #define RENAME_TABLE 3
 #define DROP_TABLE 4
-
 #define INSERT_INTO 5
 #define DELETE_FROM		6
 #define UPDATE 7
 #define SELECT 8
-
+#define USE_DB 9
 //////////////词法分析////////////////
 
 //保留字个数
 #define reservednum 27  
 
+#define FIELD_NAME_LENGTH 15
 #define getchdo if(-1==getch()) return -1
 #define getsymdo if(-1==getsym()) return -1
 
@@ -95,6 +96,15 @@ struct AnalysisWord{
 	int  num;//Store the number of a num,if not a num,sets 0.
 };
 
+typedef struct{
+	char sFiledName[FIELD_NAME_LENGTH];//字段名
+	char sType[10];//字段类型
+	//int iSize;//字长
+	bool bKey;//是否为key 0为非key 1为key
+	bool bNullFlag;//是否允许为空0为非null 1为null
+	bool bValidFlag;//是否有效
+}TableMode,*PTableMode;
+
 extern enum symbol sinsym[256];//ssym,单字符的符号值
 extern enum symbol wordsym[reservednum];//wsym,保留字对应的符号值
  extern AnalysisWord AWord[255];//分析出来的内容
@@ -111,4 +121,6 @@ extern enum symbol wordsym[reservednum];//wsym,保留字对应的符号值
 #define addmax 2047
 //#define FAILED false;
 
+ extern char globalDB[15];//这个存储USE db;执行之后 作为默认要操作的数据库
 
+ 

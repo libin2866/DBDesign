@@ -5,4 +5,4 @@
 #include <string.h>
 #include  "FileOperation.h"
 
-CString CreateTable(void);
+CString CreateDB(void);

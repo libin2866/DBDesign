@@ -13,6 +13,9 @@
 #include"Insert_Into.h"
 #include"DeleteFrom.h"
 #include"Update.h"
+#include"CreateDB.h"
+#include"UseDB.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -237,9 +240,10 @@ void CDBDesginDlg::OnBnClickedOpbtn()
 	if(type==INSERT_INTO) result=InsertInto();
 	if(type==DELETE_FROM) result=DeleteFrom();
 	if(type==UPDATE) result=Update();
+	if(type==USE_DB) result=UseDB();
+	if(type==CREATE_DB) result=CreateDB();
 
-
-	if(type==0) result="您输入的语句有误！";
+	if(type==-1) result="您输入的语句有误！";
 	GetDlgItem(IDC_RESULT)-> SetWindowText(result);
 }
 

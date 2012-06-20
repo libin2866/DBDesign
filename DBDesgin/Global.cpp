@@ -54,8 +54,11 @@ SQLTYPE AnalyseSql(char csql[]){
 		 return DELETE_FROM;
 	 if(AWord[0].type==updatesym)
 		 return UPDATE;
-
-	return 0;
+	 if(AWord[0].type==createsym&&AWord[1].type==dbsym)
+		 return CREATE_DB;
+	 if(AWord[0].type==usesym)
+		 return USE_DB;
+	return -1;
 }
 
 void init(void){

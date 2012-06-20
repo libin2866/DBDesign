@@ -1,10 +1,10 @@
 #include "stdafx.h"
 
 #include"EditTable.h"
-
+#include"FileOperation.h"
 /*Sample SQL:
 EDIT TABLE mytable(
-username varchar  NOT_KEY  NOT_NULL  VALID)IN myDB;
+uname username varchar  NOT_KEY  NOT_NULL  VALID)IN myDB;
 */
 
 CString EditTable(void){
@@ -27,7 +27,13 @@ CString EditTable(void){
 			if(AWord[i].type==identifier){//列名
 				i++;
 			}else {
-			result="'(' 附近有语法错误!缺少列名?";//缺少标识符来定义列名
+			result="'(' 附近有语法错误!缺少旧列名?";//缺少标识符来定义列名
+			return result;
+			}
+			if(AWord[i].type==identifier){//列名
+				i++;
+			}else {
+			result="'(' 附近有语法错误!缺少新列名?";//缺少标识符来定义列名
 			return result;
 			}
 			if(AWord[i].type==datetimesym){//datetime数据类型
@@ -54,7 +60,7 @@ CString EditTable(void){
 		result="缺少')'!";
 		return result;
 	}
-	i++;
+	i++;strcpy(dbName,globalDB);//记录通用数据库，如果没有 IN db，这个作为默认数据库
 	if(AWord[i].type==insym){//in XXX  xxx为目标数据库
 		i++;
 		if(AWord[i].type==identifier){
@@ -66,7 +72,13 @@ CString EditTable(void){
 		}	
      i++;
 	}
-	
+	///////////////////////
+	if(dbName==NULL) {
+		result="您还没有选择要操作的数据库!";
+		return result;
+
+	};////////////////
+
 	if(AWord[i].type!=semicolon){
 		result="缺少';'!";
 		return result;
@@ -78,60 +90,68 @@ CString EditTable(void){
 
 	///////再进行写入文件操作//////
 	strcpy(tableName,AWord[2].word);//操作表名//////////////这里需要文件处理，把表名存入文件。
-    keymark=false;//判断是否设置key 或者not key 若没有 则执行默认的操作not key
+   
+	i=5;//第四个是旧列名,第五个为新列名，第六个为数据类型
+	TableMode newcolumn;//新建一个字段
+
+	keymark=false;//判断是否设置key 或者not key 若没有 则执行默认的操作not key
 	nullmark=false;//判断是否设置null 或者not null 若没有 则执行默认的操作null
 	validmark=false;//判断是否设置valid 若没有 则执行默认的操作valid
-	i=5;//第四个是列名,第五个为数据类型
-	if(AWord[4].type==identifier){//列名
-		////////////////这里需要文件处理，判断列名的存在与否，再进行修改。
-	}
-	if(AWord[i].type==datetimesym){//datetime数据类型
-		//strcpy(columnName[c],AWord[i].word);///////////////这里需要文件处理，把类型存入文件。
+
+	//i++;//选下一个关键字
+
+	if(AWord[i].type==identifier){//列名
+		strcpy(newcolumn.sFiledName,AWord[i].word);
 		i++;
 	}
-
+	if(AWord[i].type==datetimesym){//datetime数据类型
+		strcpy(newcolumn.sType,AWord[i].word);
+		i++;
+	}
 	if(AWord[i].type==varcharsym){//varchar数据类型
-		//strcpy(columnName[c],AWord[i].word);///////////////这里需要文件处理，把类型存入文件。
+		strcpy(newcolumn.sType,AWord[i].word);
 		i++;
 	}
 	if(AWord[i].type==intsym){//int数据类型
-		//strcpy(columnName[c],AWord[i].word);///////////////这里需要文件处理，修改类型
+		strcpy(newcolumn.sType,AWord[i].word);
 		i++;
 	}
 	if(AWord[i].type==keysym){
-		///////////////这里需要文件处理，设置key标记。///////////////这里需要文件处理，存入文件。
+		newcolumn.bKey=1;
 		i++;keymark=1;
 	}
 	if(AWord[i].type==notkeysym){
-		///////////////这里需要文件处理，设置notkey标记。///////////////这里需要文件处理，存入文件。
+		newcolumn.bKey=0;
 		i++;keymark=1;
 	}
 	if(keymark==0){
-		//这里执行默认操作 即设置为not key///////////////这里需要文件处理，notkey存入文件。
+		newcolumn.bKey=0;
 	}
 
 	if(AWord[i].type==nul){//null标记
-		///////////////这里需要文件处理，把设置key标记。///////////////这里需要文件处理，存入文件。
+		newcolumn.bNullFlag=1;
 		i++;nullmark=1;
 	}
 	if(AWord[i].type==notnul){//not null标记
-		///////////////这里需要文件处理，把设置key标记。///////////////这里需要文件处理，存入文件。
+		newcolumn.bNullFlag=0;
 		i++;nullmark=1;
 	}
 	if(nullmark==0){
-		//这里执行默认操作 即设置为null///////////////这里需要文件处理，默认操作null存入文件。
+		newcolumn.bNullFlag=1;//默认允许为空
 	}
 	if(AWord[i].type==validsym){//VALID标记
-		///////////////这里需要文件处理，把设置key标记。///////////////这里需要文件处理，存入文件。
+		newcolumn.bValidFlag=1;//有效
 		i++;validmark=1;
 	}
 	if(AWord[i].type==invalidsym){//INVALID标记
-		///////////////这里需要文件处理，把设置key标记。///////////////这里需要文件处理，存入文件。
+		newcolumn.bValidFlag=0;//无效
 		i++;validmark=1;
 	}
 	if(validmark==0){
-		//这里执行默认操作 即设置为null///////////////这里需要文件处理，默认操作valid存入文件。
+		newcolumn.bValidFlag=1;//默认是有效
 	}
+
+		EditModel(dbName,tableName,newcolumn);//写入文件
 
 	
 	result="操作成功！";
