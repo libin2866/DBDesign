@@ -21,7 +21,8 @@ SELECT username FROM mytable,yourtable WHERE mytable.id=yourtable.id AND age='10
 CString Select(void){
 	CString result;
 	int i=0;
-	if(AWord[1].type!=times){//若不是*,选择全部
+	int statement;//统计条件中语句的个数
+	if(AWord[1].type!=times){//若是*,则选择全部，显示所有信息
 			do{
 			i++;
 			if(AWord[i].type==identifier){//标识符，可能有多个，执行相应操作

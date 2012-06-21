@@ -94,3 +94,14 @@ bool InsertData(char* dbName,char* tableName,vector<char*> newData){
 
 	return true;
 }
+
+bool UpdateData(char* dbName,char* tableName,char* conditionColumn,char* condition,char* destColumn,char *dest){
+
+	return true;
+}
+
+
+bool DeleteData(char* dbName,char* tableName,char* conditionColumn,char* condition){
+
+	return true;
+}

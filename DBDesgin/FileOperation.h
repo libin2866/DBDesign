@@ -44,7 +44,11 @@ vector<char*> ShowColumnDetail(char* dbName,char* tableName);
 //查看某张表的所有字段。
 vector<char*> ShowFields(char* dbName,char* tableName);
 
+//更新表中的数据，根据conditionColumn的condition确定哪条记录要改，然后在该记录的destColumn写入dest数据.(看不懂问我）
+bool UpdateData(char* dbName,char* tableName,char* conditionColumn,char* condition,char* destColumn,char *dest);
 
+//删除表中的数据(即符合条件的那整条记录)
+bool DeleteData(char* dbName,char* tableName,char* conditionColumn,char* condition);
 
 
 //bool IsColumnExists(char* dbName,char *tableName,char *column);//判断一个数据库中指定表的字段是否存在（修改字段时用）
