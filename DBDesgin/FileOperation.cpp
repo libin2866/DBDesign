@@ -34,7 +34,10 @@ bool IsDBExists(char* dbName){
 
 };
 
+bool IsTableExists(char*dbName,char* tableName){
 
+	return true;
+}
 bool BuildTable(char *dbName,char* tableName,int columns){//建立表（写入表名到数据库，先不写入表字段）
 	CString ext=".dbf";
     CString db=dbName+ext;
@@ -85,4 +88,9 @@ vector<char*> ShowTables(char* dbName){//返回数据库的所有表
 vector<char*> ShowColumns(char* dbName,char* tableName){//返回一个数据库中一张表的所有属性 
 	vector<char*> column;
 	return column;
+}
+
+bool InsertData(char* dbName,char* tableName,vector<char*> newData){
+
+	return true;
 }

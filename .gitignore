@@ -3,3 +3,4 @@ Debug/
 DBDesign/Debug/
 *.sdf
 ipch/
+*.opensdf

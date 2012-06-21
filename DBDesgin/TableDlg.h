@@ -1,7 +1,8 @@
 #pragma once
 #include"stdafx.h"
 #include"resource.h"
-
+#include<vector>
+using namespace std;
 // TableDlg 对话框
 
 class TableDlg : public CDialogEx
@@ -22,4 +23,8 @@ protected:
 public:
 	void PostNcDestroy(void);
 	BOOL OnInitDialog(void);
+		char title[15];
+	//vector<char*> tables;//存放表
+	vector<vector<char*> >tables;
+
 };

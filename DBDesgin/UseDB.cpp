@@ -36,7 +36,7 @@ CString UseDB(void){
 	tables[0].push_back("MySubTable2");
 	tables[1].push_back("MySubTable3");
 	tables[1].push_back("MySubTable4");
-
+/*
 	vector<char*> returntables=ShowTables(dbName);  
 	for(int i=0;i<returntables.size();i++)
 	{tables[i].push_back(returntables[i]);//先把表放入
@@ -46,7 +46,7 @@ CString UseDB(void){
 	  }//j
 	}//i
 
-/*	*/
+	*/
 	//vector< vector<char*> > Array( 20, vector<char*>(0) );
 
 	//Array[0].push_back("MySubTable0");

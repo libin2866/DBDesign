@@ -291,12 +291,16 @@ int getsym(void){//词法分析，获取一个符号
 				{
 					getchdo;
 					memset(sh,'\0',charlength);//先清空sh中原来的内容，防止出错****************************
-					int countx=charlength+1;
-					while(ch!='\''&&countx)//结尾
+					int countx=0;
+					while(ch!='\''&&countx<charlength)//结尾
 					{
-						strcat(sh,&ch);//存入
+						//char* temp=&ch;
+						//memset(temp,'\0',charlength);
+						//temp=&ch;
+						sh[countx]=ch;
+						//strcat(sh,&ch);//存入
 						getchdo;
-						countx--;
+						countx++;
 					}
 					getchdo;
 					if(countx<=0) return 2;//出现错误少了第二个'号
