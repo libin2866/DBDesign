@@ -1,3 +1,4 @@
+
 #include"stdafx.h"
 #include"UseDB.h"
 #include <vector>
@@ -29,14 +30,14 @@ CString UseDB(void){
 	//int total=tables.size;//数目
 	/*FOR TEST DEMO*/
 	//获取表
-	tables[0].push_back("MyTable0");
-	tables[1].push_back("MyTable2");
-	//获取表中每一项
-	tables[0].push_back("MySubTable1");
-	tables[0].push_back("MySubTable2");
-	tables[1].push_back("MySubTable3");
-	tables[1].push_back("MySubTable4");
-/*
+//	tables[0].push_back("MyTable0");
+//	tables[1].push_back("MyTable2");
+//	//获取表中每一项
+//	tables[0].push_back("MySubTable1");
+//	tables[0].push_back("MySubTable2");
+//	tables[1].push_back("MySubTable3");
+//	tables[1].push_back("MySubTable4");
+///*
 	vector<char*> returntables=ShowTables(dbName);  
 	for(int i=0;i<returntables.size();i++)
 	{tables[i].push_back(returntables[i]);//先把表放入
@@ -46,7 +47,7 @@ CString UseDB(void){
 	  }//j
 	}//i
 
-	*/
+	//*/
 	//vector< vector<char*> > Array( 20, vector<char*>(0) );
 
 	//Array[0].push_back("MySubTable0");

@@ -2,6 +2,9 @@
 #include <vector>
 using namespace std;
 
+
+
+
 //初始化数据库
 bool InitDataBase(char* dbName);
 
@@ -53,3 +56,19 @@ bool DeleteData(char* dbName,char* tableName,char* conditionColumn,char* conditi
 
 //bool IsColumnExists(char* dbName,char *tableName,char *column);//判断一个数据库中指定表的字段是否存在（修改字段时用）
 
+///////////////////////////查询相关接口//////////////////////////////////
+//根据column列的condition返回找到的全部相关内容，即SELECT *中的*号
+/*此处的type 可能要处理：-1:无条件 0:等于 1:小于 2:小于等于  3:大于 4:大于等于 (不等于先不考虑) 
+type=-1时 column与condition为空，不必考虑
+*/
+vector<vector<char*>>  SelectAllData(char*dbName,char*tableName,char*column,char*condition,int type);
+	
+//查找部分数据SELECT table1,table2,....不是*号，而table1,table2存放在vector那个参数destColumn中
+//type=-1 时 表示没有where条件 直接返回全部结果
+//此处的type 可能要处理：-1:无条件 0:等于 1:小于 2:小于等于  3:大于 4:大于等于 (不等于先不考虑)
+vector<vector<char*>> SelectPartData(char*dbName,char*tableName,char*column,char*condition,vector<char*>destColumn,int type);
+
+/**可以考虑建立一个隐式的类似view的文件，存放在一个固定的，可以供以后方便访问的地方
+这个是对两个表的连接，即 WHERE table1.column1=table2.column2
+*/
+char* ConTable(char*dbName,char*table1,char* table2,char* column1,char*  column2);

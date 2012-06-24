@@ -2,6 +2,7 @@
 #include"stdafx.h"
 #include"resource.h"
 #include<vector>
+#include "afxcmn.h"
 using namespace std;
 // TableDlg 对话框
 
@@ -24,7 +25,9 @@ public:
 	void PostNcDestroy(void);
 	BOOL OnInitDialog(void);
 		char title[15];
-	//vector<char*> tables;//存放表
-	vector<vector<char*> >tables;
-
+	//vector<char*> tables;//
+	//vector<vector<char*> >tables;
+	vector<vector<char*> >returnData;//返回数据
+	CListCtrl mTable;
+	afx_msg void OnLvnColumnclickList1(NMHDR *pNMHDR, LRESULT *pResult);
 };

@@ -1,0 +1,6 @@
+CREATE DATABASE myDB;
+
+CREATE TABLE mytable(
+username varchar KEY NOT_NULL VALID,
+age int,
+birth datetime)IN myDB;

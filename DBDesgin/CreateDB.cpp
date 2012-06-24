@@ -1,5 +1,9 @@
 #include"stdafx.h"
 #include "CreateDB.h"
+/*Sample SQL
+CREATE DATABASE mydb;
+
+*/
 
 CString CreateDB(void){
 	

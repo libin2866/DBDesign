@@ -75,7 +75,7 @@
 //////////////词法分析////////////////
 
 //保留字个数
-#define reservednum 27  
+#define reservednum 28  
 
 #define FIELD_NAME_LENGTH 15
 #define getchdo if(-1==getch()) return -1

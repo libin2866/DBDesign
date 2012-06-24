@@ -60,6 +60,8 @@ SQLTYPE AnalyseSql(char csql[]){
 		 return USE_DB;
 	  if(AWord[0].type==descsym)
 		 return DESC_TABLE;
+	  if(AWord[0].type==selectsym)
+		 return SELECT;
 	return -1;
 }
 

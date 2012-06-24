@@ -16,6 +16,7 @@
 #include"CreateDB.h"
 #include"UseDB.h"
 #include"DescTable.h"
+#include"SELECT.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -243,6 +244,7 @@ void CDBDesginDlg::OnBnClickedOpbtn()
 	if(type==USE_DB) result=UseDB();
 	if(type==CREATE_DB) result=CreateDB();
 	if(type==DESC_TABLE) result=DescTable();
+	if(type==SELECT) result=Select();
 	if(type==-1) result="您输入的语句有误！";
 
 	GetDlgItem(IDC_RESULT)-> SetWindowText(result);

@@ -67,16 +67,6 @@ BOOL TreeDlg::OnInitDialog(void)
  // hSubItem = mTree.InsertItem("Child1_1",hItem);
  //     //在Parent1上添加一个子结点
 
- // hSubItem2 = mTree.InsertItem("Baby One more Kiss",hSubItem);
- //
- // hSubItem = mTree.InsertItem("Child1_2",hItem,hSubItem);
- //    //在Parent1上添加一个子结点，排在Child1_1后面
- //
- // hSubItem = mTree.InsertItem("Child1_3",hItem,hSubItem);
- //
- //hItem = mTree.InsertItem("Parent2",TVI_ROOT,hItem);   
-
- //hItem = mTree.InsertItem("Parent3",TVI_ROOT,hItem);
 
  /*++++++++++++++++++++++++++++++++++++++++++++++++*/
 
